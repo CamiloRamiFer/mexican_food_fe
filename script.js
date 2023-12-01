@@ -5,19 +5,19 @@ let bebidas = document.querySelector("#bebidas");
 let carritoContainer = document.querySelector("#carrito-container");
 let precioFinal = 0;
 
-let carrito = []; // Arreglo para almacenar la información del carrito
+let carrito = []; 
 
-// Función para añadir al carrito
+
 function addToCart(product) {
   console.log(product);
-  // Buscar si el producto ya está en el carrito
+
   const existingItem = carrito.find(item => item.id === product.id);
 
     if (existingItem) {
-        // Si el producto ya está en el carrito, incrementar la cantidad
+ 
         existingItem.cantidad += 1;
     } else {
-        // Si el producto no está en el carrito, agregarlo con cantidad 1
+      
         const newItem = {
             id: product.id,
             nombre: product.nombre,
@@ -33,12 +33,10 @@ function addToCart(product) {
 }
 
 function removeFromCart(productId) {
-    // Buscar el índice del producto en el carrito
     console.log(productId);
     const index = carrito.findIndex(item => item.id === productId);
 
     if (index !== -1) {
-        // Si se encuentra el producto, reducir la cantidad o eliminarlo si la cantidad es 1
         if (carrito[index].cantidad > 1) {
             carrito[index].cantidad -= 1;
         } else {
@@ -49,18 +47,14 @@ function removeFromCart(productId) {
     }
 }
 
-// Función para renderizar el carrito
 function renderCarrito() {
     const carritoContainer = document.getElementById("carrito-container");
     const totalContainer = document.getElementById("total-container");
 
-    // Limpiar contenido previo
     carritoContainer.innerHTML = "";
     totalContainer.innerHTML = "";
 
-    // Verificar si hay productos en el carrito
     if (carrito.length > 0) {
-        // Mostrar cada producto en el carrito
         carrito.forEach(item => {
             const carritoItem = document.createElement("div");
             carritoItem.classList.add("carrito-item");
@@ -73,66 +67,19 @@ function renderCarrito() {
             carritoContainer.appendChild(carritoItem);
         });
 
-        // Calcular el precio total
         precioFinal = carrito.reduce((acc, item) => acc + parseFloat(item.precio * item.cantidad), 0);
 
-        // Mostrar el precio total
         const totalElement = document.createElement("div");
         totalElement.innerHTML = `<p id="total">Total: $${precioFinal.toFixed(2)}</p>`;
 
-        // Agregar el total al contenedor
         totalContainer.appendChild(totalElement);
 
 
     } else {
-        // Si el carrito está vacío, mostrar un mensaje
         carritoContainer.innerHTML = "<p>El carrito está vacío.</p>";
     }
 }
 
-// Función para renderizar los productos
-/*function renderMenu(menuData) {
-    const menuContainer = document.getElementById("menu-container");
-
-    for (const category in menuData) {
-        if (menuData.hasOwnProperty(category)) {
-            const categoryData = menuData[category];
-
-            // Crear una sección para cada categoría
-            const categorySection = document.createElement("section");
-            categorySection.classList.add("menu-category");
-            categorySection.innerHTML = `<h2>${category.charAt(0).toUpperCase() + category.slice(1)}</h2>`;
-
-            // Recorrer los productos de la categoría
-            categoryData.forEach(product => {
-                const productCard = document.createElement("div");
-                productCard.classList.add("menu-item");
-
-                productCard.innerHTML = `
-                    <img src="${product.imagen}" alt="${product.nombre}">
-                    <h3>${product.nombre}</h3>
-                    <p>${product.descripcion}</p>
-                    <p>Precio: $${product.precio}</p>
-                    <button onclick="addToCart(${product.categoria})">Añadir al carrito</button>
-                `;
-
-                categorySection.appendChild(productCard);
-            });
-
-            // Agregar la sección al contenedor principal
-            menuContainer.appendChild(categorySection);
-        }
-    }
-}*/
-
-// Realizar la solicitud fetch
-/*fetch("http://localhost:8080/api/productos")
-    .then(response => response.json())
-    .then(data => {
-        // Llamar a la función para renderizar los productos con la respuesta del endpoint
-        renderMenu(data);
-    })
-    .catch(error => console.error("Error fetching data:", error));*/
 
 const anadirProducto = (e) => {
   e.preventDefault();
@@ -219,10 +166,19 @@ const enviarForm = (event) => {
     let email = document.getElementById("email").value;
 
     if(carrito.length > 0 ){
-        console.log("Nombre:", nombre);
-        console.log("Dirección:", direccion);
-        console.log("Email:", email);
-        console.log(carrito);
+
+    let resultadoString = "";
+
+
+    for (let i = 0; i < carrito.length; i++) {
+    let { nombre, cantidad, precio } = carrito[i];
+    let objetoString = `${nombre} - Cantidad: ${cantidad} - Precio: ${precio} \n`;
+    resultadoString += objetoString;
+}
+      
+        alert(resultadoString);
+        alert(`Pedido para ${nombre}, para la dirección ${direccion}, con email ${email}`)
+        window.location.href  = "https://camiloramifer.github.io/mexican_food_fe/"
     }else{
         alert("Aniada productos a su carrito")
     }
