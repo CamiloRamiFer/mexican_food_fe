@@ -1,0 +1,64 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="styles.css">
+    
+    <title>Pedidos de Comida Mexicana</title>
+</head>
+<body>
+    <header>
+        <h1>Menú de Comida Mexicana</h1>
+    </header>
+
+    <div id="menu-container" class="menu-category">
+        <section id="entradas">
+
+        </section>
+        <section id="principales">
+            
+        </section>
+        <section id="postres">
+            
+        </section>
+        <section id="bebidas">
+            
+        </section>
+    </div>
+
+    <div id="carrito-container" class="carrito-section">
+        <!-- Aquí se mostrarán los productos en el carrito -->
+    </div>
+
+    <div id="total-container" class="total-section">
+        <!-- Aquí se mostrará el precio total del carrito -->
+    </div>
+
+    <div id="myForm">
+        <form onsubmit="return enviarForm(event)">
+            <!-- Campo de Nombre -->
+            <label for="nombre">Nombre:</label>
+            <input type="text" id="nombre" name="nombre" required>
+            <br>
+    
+            <!-- Campo de Dirección -->
+            <label for="direccion">Dirección:</label>
+            <input type="text" id="direccion" name="direccion" required>
+            <br>
+    
+            <!-- Campo de Email -->
+            <label for="email">Email:</label>
+            <input type="email" id="email" name="email" required>
+            <br>
+    
+            <!-- Botón de Enviar -->
+            <input type="submit" value="Enviar">
+        </form>
+    </div>
+
+
+</body>
+<script src="script.js" defer></script>
+</html>
+
